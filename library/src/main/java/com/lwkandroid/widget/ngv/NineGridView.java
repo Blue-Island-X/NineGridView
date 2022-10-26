@@ -180,13 +180,15 @@ public class NineGridView extends ViewGroup implements AbsNgvAdapter.OnDataChang
 
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        /*
         Log.e("AA", "measuredWidth->" + mMeasuredWidth + " "
-                //                + "widthMode->" + (MeasureSpec.AT_MOST == widthMode) + " " + (MeasureSpec.UNSPECIFIED == widthMode) + " " + (MeasureSpec.EXACTLY == widthMode)
+                "widthMode->" + (MeasureSpec.AT_MOST == widthMode) + " " + (MeasureSpec.UNSPECIFIED == widthMode) + " " + (MeasureSpec.EXACTLY == widthMode)
                 + " " + "measuredHeight->" + measuredHeight + " "
-                //                + "heightMode->" + (MeasureSpec.AT_MOST == heightMode) + " " + (MeasureSpec.UNSPECIFIED == heightMode) + " " + (MeasureSpec.EXACTLY == heightMode) + " "
+                "heightMode->" + (MeasureSpec.AT_MOST == heightMode) + " " + (MeasureSpec.UNSPECIFIED == heightMode) + " " + (MeasureSpec.EXACTLY == heightMode) + " "
                 + "mImageWidth->" + mImageWidth + " mImageHeight->" + mImageHeight + " "
                 + "requiredWidth->" + requiredWidth + " requiredHeight->" + requiredHeight + " "
         );
+        */
 
         //设置每个子控件宽高
         for (int index = 0; index < childCount; index++)
@@ -421,7 +423,8 @@ public class NineGridView extends ViewGroup implements AbsNgvAdapter.OnDataChang
         ss.mEnableEditMode = mAttrOptions.isEnableEditMode();
         ss.mHorizontalChildCount = mAttrOptions.getHorizontalChildCount();
         ss.mImageScaleType = getImageScaleTypeIndex(mAttrOptions.getImageScaleType());
-        ss.mDataList = mAdapter.getDataList();
+        if (mAdapter != null)
+            ss.mDataList = mAdapter.getDataList();
         return ss;
     }
 
