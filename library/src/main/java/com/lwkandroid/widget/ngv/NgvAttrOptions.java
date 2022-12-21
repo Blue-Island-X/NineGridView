@@ -109,5 +109,4 @@ class NgvAttrOptions
     {
         this.mImageScaleType = scaleType;
     }
-
 }

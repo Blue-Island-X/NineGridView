@@ -160,8 +160,9 @@ public class NgvChildImageView extends ViewGroup
         addView(mDeleteImageView);
     }
 
-    /*************************************************************状态恢复******************************************************************/
+    // ************************************************************* 状态恢复 ******************************************************************
 
+    /*
     @Override
     protected Parcelable onSaveInstanceState()
     {
@@ -238,4 +239,5 @@ public class NgvChildImageView extends ViewGroup
             }
         };
     }
+    */
 }

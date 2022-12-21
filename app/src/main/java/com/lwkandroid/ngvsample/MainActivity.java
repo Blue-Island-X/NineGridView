@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         mNineGridView.setSingleImageSize(TypedValue.COMPLEX_UNIT_DIP, 150, 200);
         mAdapter = new DefaultNgvAdapter<>(100, new GlideDisplayer());
 
-
         mAdapter.setOnChildClickListener(new DefaultNgvAdapter.OnChildClickedListener<ImageBean>()
         {
             @Override

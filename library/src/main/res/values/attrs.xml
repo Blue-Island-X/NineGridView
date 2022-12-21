@@ -11,5 +11,4 @@
         <attr name="horizontal_child_count" format="integer" />
         <attr name="android:scaleType" />
     </declare-styleable>
-
 </resources>

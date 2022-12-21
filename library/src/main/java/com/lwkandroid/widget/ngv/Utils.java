@@ -142,5 +142,4 @@ class Utils
     {
         return bitmap == null ? null : new BitmapDrawable(context.getResources(), bitmap);
     }
-
 }

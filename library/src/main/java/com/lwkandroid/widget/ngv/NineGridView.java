@@ -3,11 +3,7 @@ package com.lwkandroid.widget.ngv;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,31 +99,31 @@ public class NineGridView extends ViewGroup implements AbsNgvAdapter.OnDataChang
     {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        //水平方向有多少列
+        // 水平方向有多少列
         int horizontalChildCount = mAttrOptions.getHorizontalChildCount();
-        //计算竖直方向有多少行
+        // 计算竖直方向有多少行
         int childCount = getChildCount();
         int verticalChildCount = (int) Math.ceil((float) childCount / (float) horizontalChildCount);
-        //子控件间距
+        // 子控件间距
         int dividerSize = mAttrOptions.getDividerSize();
-        //获取测量宽高
-        //这里宽度需要记录下测量的最大值。因为onMeasure()执行多次，在RelativeLayout中存在问题:
-        //在执行第一次onMeasure()时，如果当前child数量较少，调用了setMeasuredDimension(requiredWidth, requiredHeight)后
-        //在第二次onMeasure执行后，MeasureSpec.getSize(widthMeasureSpec)获取的宽度会缩短，导致图片尺寸变小
+        // 获取测量宽高
+        // 这里宽度需要记录下测量的最大值。因为onMeasure()执行多次，在RelativeLayout中存在问题:
+        // 在执行第一次onMeasure()时，如果当前child数量较少，调用了setMeasuredDimension(requiredWidth, requiredHeight)后
+        // 在第二次onMeasure执行后，MeasureSpec.getSize(widthMeasureSpec)获取的宽度会缩短，导致图片尺寸变小
         mMeasuredWidth = Math.max(MeasureSpec.getSize(widthMeasureSpec), mMeasuredWidth);
         int measuredHeight = MeasureSpec.getSize(heightMeasureSpec);
-        //最终整个控件的所需宽高
+        // 最终整个控件的所需宽高
         int requiredWidth, requiredHeight;
-        //图片尺寸
+        // 图片尺寸
         int mImageWidth, mImageHeight;
-        //获取当前可用最大宽度
+        // 获取当前可用最大宽度
         int totalAvailableWidth = mMeasuredWidth - getPaddingLeft() - getPaddingRight();
-        //多张图片时，每个子控件的建议尺寸
+        // 多张图片时，每个子控件的建议尺寸
         int suggestImageSize = (totalAvailableWidth - (horizontalChildCount - 1) * dividerSize) / horizontalChildCount;
 
         if (mAttrOptions.isEnableEditMode())
         {
-            //编辑模式下，每个子控件的尺寸=建议尺寸
+            // 编辑模式下，每个子控件的尺寸=建议尺寸
             mImageWidth = mImageHeight = suggestImageSize;
             if (childCount < horizontalChildCount)
             {
@@ -139,17 +135,17 @@ public class NineGridView extends ViewGroup implements AbsNgvAdapter.OnDataChang
             requiredHeight = mImageHeight * verticalChildCount + (verticalChildCount - 1) * dividerSize + getPaddingTop() + getPaddingBottom();
         } else
         {
-            //非编辑模式下，每个控件的尺寸需要根据实际情况决定
+            // 非编辑模式下，每个控件的尺寸需要根据实际情况决定
             if (mAdapter == null || mAdapter.getDataList().size() == 0)
             {
-                //没有数据的时候，每个子控件尺寸=0
+                // 没有数据的时候，每个子控件尺寸=0
                 mImageWidth = mImageHeight = 0;
                 requiredWidth = getPaddingLeft() + getPaddingRight();
                 requiredHeight = getPaddingTop() + getPaddingBottom();
             } else if (mAdapter.getDataList().size() == 1)
             {
-                //只有一张图片时
-                //没有额外设置单张图片尺寸时使用建议尺寸，否则需要取最小值
+                // 只有一张图片时
+                // 没有额外设置单张图片尺寸时使用建议尺寸，否则需要取最小值
                 if (mAttrOptions.getSingleImageWidth() <= 0 || mAttrOptions.getSingleImageHeight() <= 0)
                 {
                     mImageWidth = mImageHeight = suggestImageSize;
@@ -162,7 +158,7 @@ public class NineGridView extends ViewGroup implements AbsNgvAdapter.OnDataChang
                 requiredHeight = mImageHeight + getPaddingTop() + getPaddingBottom();
             } else
             {
-                //多张图片时，每个子控件的尺寸=建议尺寸
+                // 多张图片时，每个子控件的尺寸=建议尺寸
                 mImageWidth = mImageHeight = suggestImageSize;
                 if (childCount < horizontalChildCount)
                 {
@@ -175,7 +171,7 @@ public class NineGridView extends ViewGroup implements AbsNgvAdapter.OnDataChang
             }
         }
 
-        //设置最终该控件宽高
+        // 设置最终该控件宽高
         setMeasuredDimension(requiredWidth, requiredHeight);
 
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
@@ -190,7 +186,7 @@ public class NineGridView extends ViewGroup implements AbsNgvAdapter.OnDataChang
         );
         */
 
-        //设置每个子控件宽高
+        // 设置每个子控件宽高
         for (int index = 0; index < childCount; index++)
         {
             View childView = getChildAt(index);
@@ -363,7 +359,7 @@ public class NineGridView extends ViewGroup implements AbsNgvAdapter.OnDataChang
         requestLayout();
     }
 
-    /*************************************************私有方法*******************************************************************************/
+    /************************************************* 私有方法 *******************************************************************************/
     /**
      * 判断当前是否能显示“+”号
      */
@@ -408,8 +404,9 @@ public class NineGridView extends ViewGroup implements AbsNgvAdapter.OnDataChang
         mPlusImageView = null;
     }
 
-    /*************************************************************状态恢复******************************************************************/
+    // ************************************************************* 状态恢复 ******************************************************************
 
+    /*
     @Override
     protected Parcelable onSaveInstanceState()
     {
@@ -532,4 +529,5 @@ public class NineGridView extends ViewGroup implements AbsNgvAdapter.OnDataChang
             }
         };
     }
+    */
 }
